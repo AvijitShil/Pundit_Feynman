@@ -1,0 +1,12 @@
+# Pundit Feynman: Paper-to-Notebook Pipeline
+# Created for Hugging Face Spaces Deployment
+
+fastapi
+uvicorn
+python-dotenv
+requests
+openai
+httpx
+pymupdf
+nbformat
+python-multipart
