@@ -1,12 +1,3 @@
----
-title: Pundit Feynman
-emoji: 🎓
-colorFrom: yellow
-colorTo: gray
-sdk: docker
-pinned: false
-license: mit
----
 
 # Pundit Feynman 🧠
 
@@ -33,3 +24,4 @@ license: mit
 - **OCR**: NVIDIA NeMo Retriever
 - **Image Gen**: FLUX.1-schnell
 - **Frontend**: Vanilla HTML/CSS/JS (Beige & Serif Aesthetic)
+
