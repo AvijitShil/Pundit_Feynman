@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pundit Feynman — Research Paper to Code</title>
+    <link rel="stylesheet" href="/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Left Panel: Upload & Status -->
+    <aside class="left-panel" id="left-panel">
+        <div class="panel-inner">
+            <header>
+                <h1>Pundit Feynman</h1>
+                <p class="tagline">Upload a research paper.<br>Learn it the Feynman way.</p>
+                <button id="visualize-btn" class="header-visualize hidden" style="display: none !important;">🎨
+                    Visualize Concept</button>
+            </header>
+
+            <!-- Upload State -->
+            <div id="upload-section">
+                <div id="drop-zone" class="drop-zone">
+                    <svg class="upload-icon" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="drop-text">Drop your PDF here</p>
+                    <span class="drop-hint">or click to browse</span>
+                    <input type="file" id="file-input" accept="application/pdf" hidden>
+                </div>
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>or paste arXiv link</span>
+                </div>
+
+                <!-- arXiv URL Input -->
+                <div class="arxiv-input-row">
+                    <input type="text" id="arxiv-input" class="arxiv-input"
+                        placeholder="https://arxiv.org/abs/2401.12345">
+                    <button id="arxiv-btn" class="btn btn-primary arxiv-btn">Go →</button>
+                </div>
+            </div>
+
+            <!-- Extraction Progress -->
+            <div id="extract-status" class="status-box hidden">
+                <div class="spinner"></div>
+                <p class="status-label" id="extract-label">Analyzing paper…</p>
+                <p class="status-sub">This may take a few minutes for long papers.</p>
+            </div>
+
+            <!-- Stream Active Indicator -->
+            <div id="stream-status" class="status-box hidden">
+                <div class="pulse-dot"></div>
+                <p class="status-label">Generating code live…</p>
+                <p class="status-sub">Watch the output in the code viewer →</p>
+            </div>
+
+            <!-- Done -->
+            <div id="done-section" class="status-box hidden">
+                <p class="done-check">✓</p>
+                <p class="status-label">Generation complete</p>
+                <div class="btn-row">
+                    <a id="download-btn" class="btn btn-primary" download="pundit_feynman_notebook.ipynb">⬇ Download
+                        .ipynb</a>
+                    <button id="reset-btn" class="btn btn-secondary">↻ New Paper</button>
+                </div>
+            </div>
+
+            <!-- Error -->
+            <div id="error-section" class="status-box hidden">
+                <p class="error-x">✕</p>
+                <p class="status-label">Something went wrong</p>
+                <p class="status-sub" id="error-text"></p>
+                <button id="error-reset-btn" class="btn btn-secondary">↻ Try Again</button>
+            </div>
+
+            <footer>
+                <p>Powered by <strong>NVIDIA NIM</strong></p>
+                <div class="feedback-footer">
+                    <p>please give feedback, so that i can make it better</p>
+                    <a href="https://mail.google.com/mail/?view=cm&to=Avijitshil52460@gmail.com&su=Pundit%20Feynman%20Feedback"
+                        target="_blank" class="feedback-link">Avijitshil52460@gmail.com</a>
+                </div>
+            </footer>
+        </div>
+    </aside>
+
+    <!-- Right Panel: Live Code Viewer -->
+    <main class="right-panel" id="right-panel">
+        <div class="code-header">
+            <span class="code-title">Code Output</span>
+            <span class="code-badge" id="code-badge">waiting</span>
+        </div>
+        <pre class="code-viewer"
+            id="code-viewer"><code id="code-output">// Upload a paper to see the generated code here…</code></pre>
+    </main>
+
+    <script src="/script.js?v=4"></script>
+
+    <!-- Floating Image Window (Hidden) -->
+    <div id="image-float" class="float-window hidden" style="display: none !important;">
+        <div class="float-header" id="float-header">
+            <span class="float-title">🎨 Concept Illustration</span>
+            <div class="float-actions">
+                <button id="float-download" class="float-btn" title="Download PNG">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                </button>
+                <button id="float-minimize" class="float-btn" title="Minimize">─</button>
+                <button id="float-close" class="float-btn" title="Close">✕</button>
+            </div>
+        </div>
+        <div class="float-body" id="float-body">
+            <div class="float-spinner" id="float-spinner">
+                <div class="paint-brush-container">
+                    <div class="brush">🖌️</div>
+                    <div class="shimmer-line"></div>
+                </div>
+                <p id="visualize-status">FLUX is painting your concept…</p>
+            </div>
+            <img id="float-image" class="float-image hidden" alt="Concept Illustration" />
+        </div>
+    </div>
+
+    <!-- Minimized Pill (Hidden) -->
+    <div id="image-pill" class="float-pill hidden" style="display: none !important;">
+        <span>🎨 Illustration</span>
+    </div>
+</body>
+
+</html>
