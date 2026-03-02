@@ -20,8 +20,9 @@
 
 ## 🛠️ Tech Stack
 - **Backend**: FastAPI
-- **LLM**: NVIDIA NIM (Qwen-VL-Instruct / Qwen2-72B)
+- **LLM**: NVIDIA NIM (Qwen-VL-Instruct / Qwen3.5 - 397B a17B)
 - **OCR**: NVIDIA NeMo Retriever
 - **Image Gen**: FLUX.1-schnell
 - **Frontend**: Vanilla HTML/CSS/JS (Beige & Serif Aesthetic)
+
 
